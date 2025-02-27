@@ -11,7 +11,7 @@ def create_screenshot_taker():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(service=Service(), options=options)
-    driver.set_window_size(1000, 2000)
+    driver.set_window_size(1920, 1080*2)
 
     def take_screenshot(url, output_path, wait_time=3):
         try:
@@ -23,7 +23,6 @@ def create_screenshot_taker():
             time.sleep(0.5)  
             driver.execute_script(f"window.scrollBy(0, -120);") # 向上滚动
             time.sleep(0.5)  
-
 
             timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
             filename = os.path.basename(output_path)
