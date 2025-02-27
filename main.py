@@ -41,4 +41,5 @@ if __name__ == "__main__":
     take_screenshot, close_driver = create_screenshot_taker()
     take_screenshot("https://www.bilibili.com", "bilibili")
     close_driver()
+
     
