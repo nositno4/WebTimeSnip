@@ -18,6 +18,10 @@ def create_screenshot_taker():
             os.makedirs(output_path, exist_ok=True)
             driver.get(url)
             time.sleep(wait_time)
+            driver.execute_script(f"window.scrollBy(0, 20);")  # 向下滚动
+            time.sleep(0.5)  # 添加一个短暂的延迟，以便观察滚动效果
+            driver.execute_script(f"window.scrollBy(0, -20);") # 向上滚动
+            time.sleep(0.5)  # 添加一个短暂的延迟，以便观察滚动效果
 
             timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
             filename = os.path.basename(output_path)
