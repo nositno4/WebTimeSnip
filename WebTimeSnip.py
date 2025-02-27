@@ -11,7 +11,7 @@ def create_screenshot_taker():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(service=Service(), options=options)
-    
+    driver.set_window_size(1920, 1080*2)
 
     def take_screenshot(url, output_path, wait_time=3):
         try:
