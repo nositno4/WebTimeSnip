@@ -1,0 +1,41 @@
+name: auto snip
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium chromedriver-binary
+
+      - name: run WebTimeSnip.py 
+        run: |
+          python WebTimeSnip.py
+
+      - name: Commit and push changes
+        run: |
+          set -e
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          if [[ -n $(git status --porcelain) ]]; then
+            git commit -m "Capture website snapshot: $(date +'%Y-%m-%d')"
+            git push origin main
+          else
+            echo "No changes to commit."
+          fi
