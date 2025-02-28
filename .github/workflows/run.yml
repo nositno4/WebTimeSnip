@@ -35,7 +35,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pyinstaller --onefile build main.py
+          pyinstaller --onefile --workpath build --distpath build main.py # 修改 pyinstaller 命令
 
       - name: Run executable
         run: |
