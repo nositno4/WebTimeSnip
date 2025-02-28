@@ -21,25 +21,14 @@ jobs:
       - name: Install fonts
         run: sudo apt install fonts-wqy-microhei # 安装中文字体
 
-      - name: Cache executable
-        uses: actions/cache@v3
-        id: cache # 添加 id
-        with:
-          path: build
-          key: ${{ runner.os }}-executable-${{ hashFiles('*.py', 'requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-executable-
-
-      - name: Install dependencies and build executable with PyInstaller
-        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pyinstaller --onefile --workpath build --distpath build main.py # 修改 pyinstaller 命令
 
       - name: Run executable
         run: |
-          ./build/main
+          python main.py
 
       - name: Commit and push changes
         run: |
